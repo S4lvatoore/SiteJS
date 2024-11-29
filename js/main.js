@@ -6,7 +6,15 @@ document.getElementById('add-task-btn').addEventListener('click', () => {
 document.getElementById('sort-tasks').addEventListener('change', () => {
     renderTasks();
 });
-
+document.getElementById('filter-all').addEventListener('click', () => {
+    renderTasks('all');
+});
+document.getElementById('filter-done').addEventListener('click', () => {
+    renderTasks('done');
+});
+document.getElementById('filter-remained').addEventListener('click', () => {
+    renderTasks('remained');
+});
 document.getElementById('task-form').addEventListener('submit', (e) => {
     e.preventDefault();
     const name = document.getElementById('task-name').value.trim();
