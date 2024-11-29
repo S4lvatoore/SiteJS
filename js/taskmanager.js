@@ -1,7 +1,7 @@
 
 class Task {
     constructor(name, description) {
-        this.id = Date.now();
+        this.id = Date.now(); // Уникальный идентификатор задачи
         this.name = name;
         this.description = description;
         this.createdDate = new Date().toLocaleString();
@@ -45,6 +45,7 @@ class TasksManager {
             this.saveTasks();
         }
     }
+
     getTasks(filter = 'all', sortBy = 'date') {
         let filteredTasks = this.tasks;
 
@@ -64,6 +65,13 @@ class TasksManager {
 
         return filteredTasks;
     }
-
-
 }
+
+
+
+
+
+
+
+
+
