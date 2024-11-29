@@ -1,3 +1,4 @@
+
 class Task {
     constructor(name, description) {
         this.id = Date.now();
@@ -22,5 +23,20 @@ class TasksManager {
         this.tasks.push(task);
         this.saveTasks();
     }
+
+    editTask(id, newName, newDescription) {
+        const task = this.tasks.find(task => task.id === id);
+        if (task) {
+            task.name = newName;
+            task.description = newDescription;
+            this.saveTasks();
+        }
+    }
+
+    deleteTask(id) {
+        this.tasks = this.tasks.filter(task => task.id !== id);
+        this.saveTasks();
+    }
+
 
 }
