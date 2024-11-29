@@ -38,5 +38,13 @@ class TasksManager {
         this.saveTasks();
     }
 
+    toggleCompletion(id) {
+        const task = this.tasks.find(task => task.id === id);
+        if (task) {
+            task.isCompleted = !task.isCompleted;
+            this.saveTasks();
+        }
+    }
+
 
 }
