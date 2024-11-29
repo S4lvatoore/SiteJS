@@ -15,11 +15,43 @@ body {
     min-height: 100vh;
     padding: 20px;
 }
+
 h1 {
     font-size: 2rem;
     margin-bottom: 20px;
     color: #2c3e50;
 }
+
+#task-list {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px 0;
+}
+
+#task-list div {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.task-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #3498db;
+    cursor: pointer;
+}
+
+.task-name:hover {
+    text-decoration: underline;
+}
+
+
+.task-status {
+    margin-right: 10px;
+}
+
 button {
     background-color: #e74c3c;
     border: none;
@@ -31,12 +63,43 @@ button {
     transition: background-color 0.3s ease;
     margin-left: 10px;
 }
+
 button:hover {
     background-color: #c0392b;
 }
-.task-status {
+
+button:focus {
+    outline: none;
+}
+#close-modal
+{
+    margin-left: 320px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+#add-task-btn {
+    background-color: #2ecc71;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+select, button {
     margin-right: 10px;
 }
+
+#filter-all, #filter-done, #filter-remaining {
+    background-color: #3498db;
+}
+
+#filter-all:hover, #filter-done:hover, #filter-remaining:hover {
+    background-color: #2980b9;
+}
+
+
 #task-form-modal {
     display: none;
     position: fixed;
@@ -48,3 +111,43 @@ button:hover {
     justify-content: center;
     align-items: center;
 }
+
+#task-form-modal form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+button[type="submit"] {
+    background-color: #2ecc71;
+}
+
+button[type="button"] {
+    background-color: #e74c3c;
+    margin-left: 10px;
+}
+
+button[type="submit"]:hover, button[type="button"]:hover {
+    opacity: 0.9;
+}
+
+#task-form-modal.show {
+    display: flex;
+}
+

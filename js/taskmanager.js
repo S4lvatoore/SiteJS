@@ -7,7 +7,6 @@ class Task {
         this.isCompleted = false;
     }
 }
-
 class TasksManager {
     constructor() {
         this.tasks = JSON.parse(localStorage.getItem('tasks')) || [];
