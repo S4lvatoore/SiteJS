@@ -33,7 +33,10 @@ document.getElementById('task-form').addEventListener('submit', (e) => {
     const nameRegex = /^(?!^\d+$)(?!^\s)([A-Za-zА-Яа-я0-9]{1,16})(?:\s([A-Za-zА-Яа-я0-9]{1,16})){1,}$/;
     const descriptionRegex = /^(?!^\s*$)(?!^\s*.*\b(?:name|task|title)\b.*$).+$/;
 
-    if (name.toLowerCase() === description.toLowerCase()) {
+    const cleanName = name.replace(/\s+/g, '').toLowerCase();
+    const cleanDescription = description.replace(/\s+/g, '').toLowerCase();
+
+    if (cleanName === cleanDescription) {
         alert("Error! Description cannot match task name.");
         return;
     }
