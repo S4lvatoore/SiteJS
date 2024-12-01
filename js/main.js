@@ -6,7 +6,7 @@ document.getElementById('add-task-btn').addEventListener('click', () => {
 
 document.getElementById('close-modal').addEventListener('click', () => {
     document.getElementById('task-form-modal').style.display = 'none';
-    document.getElementById('task-name').value = '';  // Очищаем поля
+    document.getElementById('task-name').value = '';
     document.getElementById('task-description').value = '';
 });
 
@@ -30,8 +30,13 @@ document.getElementById('task-form').addEventListener('submit', (e) => {
     const name = document.getElementById('task-name').value.trim();
     const description = document.getElementById('task-description').value.trim();
 
-    const nameRegex = /^((?!^\d+$)[A-Za-zА-Яа-я0-9]+(\s[A-Za-zА-Яа-я0-9]+)+)$/;
-    const descriptionRegex = /^((?!^.*\b(?:name)\b.*$).+)$/;
+    const nameRegex = /^(?!^\d+$)(?!^\s)([A-Za-zА-Яа-я0-9]{1,16})(?:\s([A-Za-zА-Яа-я0-9]{1,16})){1,}$/;
+    const descriptionRegex = /^(?!^\s*$)(?!^\s*.*\b(?:name|task|title)\b.*$).+$/;
+
+    if (name.toLowerCase() === description.toLowerCase()) {
+        alert("Error! Description cannot match task name.");
+        return;
+    }
 
     if (!nameRegex.test(name)) {
         alert("Error! The name must contain at least two words, cannot consist only of numbers, and cannot contain spaces at the beginning or end.");
@@ -46,6 +51,7 @@ document.getElementById('task-form').addEventListener('submit', (e) => {
     tasksManager.addTask(name, description);
     document.getElementById('task-name').value = '';
     document.getElementById('task-description').value = '';
+    document.getElementById('task-form-modal').style.display = 'none';
     renderTasks();
 });
 
@@ -70,15 +76,7 @@ function renderTasks(filter = 'all') {
 
 renderTasks();
 
-document.getElementById('close-modal').addEventListener('click', () => {
-    document.getElementById('task-form-modal').style.display = 'none';
-    document.getElementById('task-name').value = '';
-    document.getElementById('task-description').value = '';
-});
-
-
 window.addEventListener('beforeunload', (event) => {
-
     if (document.getElementById('task-name').value || document.getElementById('task-description').value) {
         event.preventDefault();
     }
