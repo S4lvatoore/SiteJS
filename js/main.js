@@ -5,6 +5,9 @@ document.getElementById('add-task-btn').addEventListener('click', () => {
 });
 document.getElementById('close-modal').addEventListener('click', () => {
     document.getElementById('task-form-modal').style.display = 'none';
+    document.getElementById('task-name').value = '';
+    document.getElementById('task-description').value = '';
+
 });
 document.getElementById('sort-tasks').addEventListener('change', () => {
     renderTasks();
