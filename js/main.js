@@ -40,15 +40,20 @@ document.getElementById('task-form').addEventListener('submit', (e) => {
     const description = document.getElementById('task-description').value.trim();
 
     const nameRegex = /^((?!^\d+$)[A-Za-zА-Яа-я0-9]+(\s[A-Za-zА-Яа-я0-9]+)+)$/;
+    const descriptionRegex = /^((?!^.*\b(?:name)\b.*$).+)$/;
     if (!nameRegex.test(name)) {
         alert("Error! The name must contain at least two words, cannot consist only of numbers, and cannot contain spaces at the beginning or end.");
+        return;
+    }
+    if (!descriptionRegex.test(description)) {
+        alert("Ошибка! Описание не должно совпадать с названием задачи.");
         return;
     }
     tasksManager.addTask(name, description);
     document.getElementById('task-name').value = '';
     document.getElementById('task-description').value = '';
     document.getElementById('task-form-modal').style.display = 'none';
-    renderTasks();  
+    renderTasks();
 });
 function renderTasks(filter = 'all') {
     const tasks = tasksManager.getTasks(filter, document.getElementById('sort-tasks').value);
