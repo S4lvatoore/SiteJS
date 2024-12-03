@@ -59,7 +59,17 @@ document.getElementById('task-form').addEventListener('submit', (e) => {
 });
 
 function renderTasks(filter = 'all') {
-    const tasks = tasksManager.getTasks(filter, document.getElementById('sort-tasks').value);
+    const sortBy = document.getElementById('sort-tasks').value;
+    let tasks;
+
+    if (filter === 'done') {
+        tasks = tasksManager.filterDone(sortBy);
+    } else if (filter === 'remained') {
+        tasks = tasksManager.filterRemained(sortBy);
+    } else {
+        tasks = tasksManager.getAllTasks(sortBy);
+    }
+
     const taskList = document.getElementById('task-list');
     taskList.innerHTML = '';
 
@@ -67,17 +77,16 @@ function renderTasks(filter = 'all') {
         const taskItem = document.createElement('div');
         taskItem.classList.add('task-item');
         taskItem.innerHTML = `
-         <input type="checkbox" ${task.isCompleted ? 'checked' : ''} onclick="tasksManager.toggleCompletion(${task.id})">
-         <span class="task-name">
-         <a href="task.html?id=${task.id}">${task.name}</a>
-         </span>
-        <button onclick="tasksManager.deleteTask(${task.id}); renderTasks();">Delete</button>
-        <a href="edit.html?id=${task.id}">Edit</a>
-`;
+            <input type="checkbox" ${task.isCompleted ? 'checked' : ''} onclick="tasksManager.toggleCompletion(${task.id})">
+            <span class="task-name">
+                <a href="task.html?id=${task.id}">${task.name}</a>
+            </span>
+            <button onclick="tasksManager.deleteTask(${task.id}); renderTasks();">Delete</button>
+            <a href="edit.html?id=${task.id}">Edit</a>
+        `;
         taskList.appendChild(taskItem);
     });
 }
-
 renderTasks();
 
 window.addEventListener('beforeunload', (event) => {

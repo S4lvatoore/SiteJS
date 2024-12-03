@@ -43,25 +43,25 @@ class TasksManager {
             this.saveTasks();
         }
     }
-
-    getTasks(filter = 'all', sortBy = 'date') {
-        let filteredTasks = this.tasks;
-
-        if (filter === 'done') {
-            filteredTasks = filteredTasks.filter(task => task.isCompleted);
-        } else if (filter === 'remained') {
-            filteredTasks = filteredTasks.filter(task => !task.isCompleted);
-        }
-
-        filteredTasks = filteredTasks.sort((a, b) => {
+    getAllTasks(sortBy = 'date') {
+        return this.sortTasks(this.tasks, sortBy);
+    }
+    filterDone(sortBy = 'date') {
+        const doneTasks = this.tasks.filter(task => task.isCompleted);
+        return this.sortTasks(doneTasks, sortBy);
+    }
+    filterRemained(sortBy = 'date') {
+        const remainedTasks = this.tasks.filter(task => !task.isCompleted);
+        return this.sortTasks(remainedTasks, sortBy);
+    }
+    sortTasks(tasks, sortBy) {
+        return tasks.sort((a, b) => {
             if (sortBy === 'date') {
                 return new Date(b.createdDate) - new Date(a.createdDate);
             } else {
                 return a.name.localeCompare(b.name);
             }
         });
-
-        return filteredTasks;
     }
 }
 
