@@ -1,4 +1,7 @@
 const tasksManager = new TasksManager();
+let currentFilter = 'all';
+
+
 document.getElementById('add-task-btn').addEventListener('click', () => {
     document.getElementById('task-form-modal').style.display = 'block';
 });
@@ -14,6 +17,7 @@ document.getElementById('task-form').addEventListener('submit', (e) => {
 
     const name = document.getElementById('task-name').value.trim();
     const description = document.getElementById('task-description').value.trim();
+
     const nameRegex = /^(?!^\d+$)(?!^\s)([A-Za-zА-Яа-я0-9]{1,16})(?:\s([A-Za-zА-Яа-я0-9]{1,16})){1,}$/;
     const descriptionRegex = /^(?!^\s*$)(?!^\s*.*\b(?:name|task|title)\b.*$).+$/;
 
@@ -39,7 +43,7 @@ document.getElementById('task-form').addEventListener('submit', (e) => {
     document.getElementById('task-name').value = '';
     document.getElementById('task-description').value = '';
     document.getElementById('task-form-modal').style.display = 'none';
-    renderTasks();
+    renderTasks(currentFilter);
 });
 
 document.getElementById('submit-visible').addEventListener('click', (e) => {
@@ -72,22 +76,27 @@ document.getElementById('submit-visible').addEventListener('click', (e) => {
     tasksManager.addTask(name, description);
     document.getElementById('task-name-visible').value = '';
     document.getElementById('task-description-visible').value = '';
-    renderTasks();
+    renderTasks(currentFilter);
 });
 
+
 document.getElementById('sort-tasks').addEventListener('change', () => {
-    renderTasks();
+    renderTasks(currentFilter);
 });
 
 document.getElementById('filter-all').addEventListener('click', () => {
-    renderTasks('all');
+    currentFilter = 'all';
+    renderTasks(currentFilter);
 });
 document.getElementById('filter-done').addEventListener('click', () => {
-    renderTasks('done');
+    currentFilter = 'done';
+    renderTasks(currentFilter);
 });
 document.getElementById('filter-remained').addEventListener('click', () => {
-    renderTasks('remained');
+    currentFilter = 'remained';
+    renderTasks(currentFilter);
 });
+
 function renderTasks(filter = 'all') {
     const sortBy = document.getElementById('sort-tasks').value;
     let tasks;
@@ -102,19 +111,23 @@ function renderTasks(filter = 'all') {
 
     const taskList = document.getElementById('task-list');
     taskList.innerHTML = '';
+
     tasks.forEach(task => {
         const taskItem = document.createElement('div');
         taskItem.classList.add('task-item');
         taskItem.innerHTML = `
-            <input type="checkbox" ${task.isCompleted ? 'checked' : ''} onclick="tasksManager.toggleCompletion(${task.id})">
+            <input type="checkbox" ${task.isCompleted ? 'checked' : ''} onclick="toggleTaskCompletion(${task.id})">
             <span class="task-name">
                 <a href="task.html?id=${task.id}">${task.name}</a>
             </span>
-            <button onclick="tasksManager.deleteTask(${task.id}); renderTasks();">Delete</button>
+            <button onclick="tasksManager.deleteTask(${task.id}); renderTasks(currentFilter);">Delete</button>
             <a href="edit.html?id=${task.id}">Edit</a>
         `;
         taskList.appendChild(taskItem);
     });
 }
-renderTasks();
-
+function toggleTaskCompletion(taskId) {
+    tasksManager.toggleCompletion(taskId);
+    renderTasks(currentFilter);
+}
+renderTasks(currentFilter);
