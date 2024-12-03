@@ -67,12 +67,13 @@ function renderTasks(filter = 'all') {
         const taskItem = document.createElement('div');
         taskItem.classList.add('task-item');
         taskItem.innerHTML = `
-            <input type="checkbox" ${task.isCompleted ? 'checked' : ''} onclick="tasksManager.toggleCompletion(${task.id})">
-            <span class="task-name">${task.name}</span>
-            <a href="task.html?id=${task.id}">Details</a>
-            <button onclick="tasksManager.deleteTask(${task.id}); renderTasks();">Delete</button>
-            <a href="edit.html?id=${task.id}">Edit</a>
-        `;
+         <input type="checkbox" ${task.isCompleted ? 'checked' : ''} onclick="tasksManager.toggleCompletion(${task.id})">
+         <span class="task-name">
+         <a href="task.html?id=${task.id}">${task.name}</a>
+         </span>
+        <button onclick="tasksManager.deleteTask(${task.id}); renderTasks();">Delete</button>
+        <a href="edit.html?id=${task.id}">Edit</a>
+`;
         taskList.appendChild(taskItem);
     });
 }
