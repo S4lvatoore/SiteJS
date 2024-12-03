@@ -10,21 +10,26 @@
 
 <h1>My task list</h1>
 
-
 <button id="add-task-btn">Add task</button>
 
 <div id="task-form-modal" class="modal">
   <div class="modal-content">
-
     <form id="task-form">
       <button id="close-modal" class="close-btn">X</button>
       <input type="text" id="task-name" placeholder="Task Name" required>
       <textarea id="task-description" placeholder="Task details" required></textarea>
       <button type="submit">Submit</button>
-
     </form>
   </div>
 </div>
+
+<div id="always-visible-form">
+  <h3>Add New Task</h3>
+  <input type="text" id="task-name-visible" placeholder="Task Name" required>
+  <textarea id="task-description-visible" placeholder="Task details" required></textarea>
+  <button id="submit-visible">Submit</button>
+</div>
+
 
 <select id="sort-tasks">
   <option value="date">By Date</option>
