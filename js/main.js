@@ -18,7 +18,7 @@ document.getElementById('task-form').addEventListener('submit', (e) => {
     const name = document.getElementById('task-name').value.trim();
     const description = document.getElementById('task-description').value.trim();
 
-    const nameRegex = /^(?!^\d+$)(?!^\s)([A-Za-zА-Яа-я0-9]{1,16})(?:\s([A-Za-zА-Яа-я0-9]{1,16})){1,}$/;
+    const nameRegex = /^(?!^\d+$)(?!^\s)([A-Za-zА-Яа-я]{1,16})(?:\s([A-Za-zА-Яа-я]{1,16})){1,}$/;
     const descriptionRegex = /^(?!^\s*$)(?!^\s*.*\b(?:name|task|title)\b.*$).+$/;
 
     const cleanName = name.replace(/\s+/g, '').toLowerCase();
@@ -30,7 +30,7 @@ document.getElementById('task-form').addEventListener('submit', (e) => {
     }
 
     if (!nameRegex.test(name)) {
-        alert("Error! The name must contain at least two words, cannot consist only of numbers, and cannot contain spaces at the beginning or end.");
+        alert("Error! The name must contain at least two words, cannot consist only of numbers, and cannot contain spaces at the beginning or end. \n Minimum length of the words is 1 , Maximum is 16");
         return;
     }
 
@@ -52,7 +52,9 @@ document.getElementById('submit-visible').addEventListener('click', (e) => {
     const name = document.getElementById('task-name-visible').value.trim();
     const description = document.getElementById('task-description-visible').value.trim();
 
-    const nameRegex = /^(?!^\d+$)(?!^\s)([A-Za-zА-Яа-я0-9]{1,16})(?:\s([A-Za-zА-Яа-я0-9]{1,16})){1,}$/;
+    const nameRegex = /^(?!^\d+$)(?!^\s)([A-Za-zА-Яа-я]{1,16})(?:\s([A-Za-zА-Яа-я]{1,16})){1,}$/;
+
+
     const descriptionRegex = /^(?!^\s*$)(?!^\s*.*\b(?:name|task|title)\b.*$).+$/;
 
     const cleanName = name.replace(/\s+/g, '').toLowerCase();
@@ -64,7 +66,7 @@ document.getElementById('submit-visible').addEventListener('click', (e) => {
     }
 
     if (!nameRegex.test(name)) {
-        alert("Error! The name must contain at least two words, cannot consist only of numbers, and cannot contain spaces at the beginning or end.");
+        alert("Error! The name must contain at least two words, cannot consist only of numbers, and cannot contain spaces at the beginning or end. \nMinimum length of the words is 1 , Maximum is 16");
         return;
     }
 
