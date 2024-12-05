@@ -18,7 +18,9 @@ document.getElementById('task-form').addEventListener('submit', (e) => {
     const name = document.getElementById('task-name').value.trim();
     const description = document.getElementById('task-description').value.trim();
 
-    const nameRegex = /^(?!^\d+$)(?!^\s)([A-Za-zА-Яа-я]{1,16})(?:\s([A-Za-zА-Яа-я]{1,16})){1,}$/;
+    const nameRegex = /^(?!^\d+(\s\d+)*$)(?!^\s)(([A-Za-zА-Яа-я]{1,16})(\s([A-Za-zА-Яа-я]{1,16}))+)$/;
+
+
     const descriptionRegex = /^(?!^\s*$)(?!^\s*.*\b(?:name|task|title)\b.*$).+$/;
 
     const cleanName = name.replace(/\s+/g, '').toLowerCase();
@@ -52,7 +54,7 @@ document.getElementById('submit-visible').addEventListener('click', (e) => {
     const name = document.getElementById('task-name-visible').value.trim();
     const description = document.getElementById('task-description-visible').value.trim();
 
-    const nameRegex = /^(?!^\d+$)(?!^\s)([A-Za-zА-Яа-я]{1,16})(?:\s([A-Za-zА-Яа-я]{1,16})){1,}$/;
+    const nameRegex = /^(?!^\d+(\s\d+)*$)(?!^\s)(([A-Za-zА-Яа-я]{1,16})(\s([A-Za-zА-Яа-я]{1,16}))+)$/;
 
 
     const descriptionRegex = /^(?!^\s*$)(?!^\s*.*\b(?:name|task|title)\b.*$).+$/;
