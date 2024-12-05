@@ -15,7 +15,7 @@ if (!task) {
         const name = document.getElementById('edit-task-name').value.trim();
         const description = document.getElementById('edit-task-description').value.trim();
 
-        const nameRegex = /^(?!^\d+$)(?!^\s)([A-Za-zА-Яа-я0-9]{1,16})(?:\s([A-Za-zА-Яа-я0-9]{1,16})){1,}$/;
+        const nameRegex = /^(?!^\d+(\s\d+)*$)(?!^\s)(([A-Za-zА-Яа-я]{1,16})(\s([A-Za-zА-Яа-я]{1,16}))+)$/;
         const descriptionRegex = /^(?!^\s*$)(?!^\s*.*\b(?:name|task|title)\b.*$).+$/;
 
         const cleanName = name.replace(/\s+/g, '').toLowerCase();
@@ -27,7 +27,7 @@ if (!task) {
         }
 
         if (!nameRegex.test(name)) {
-            alert("Error! The name must contain at least two words, cannot consist only of numbers, and cannot contain spaces at the beginning or end.");
+            alert("Error! The name must contain at least two words, cannot consist only of numbers, and cannot contain spaces at the beginning or end.\nMinimum length of the words is 1 , Maximum is 16");
             return;
         }
 
